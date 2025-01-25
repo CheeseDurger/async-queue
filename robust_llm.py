@@ -28,7 +28,7 @@ def get_robust_llm(model: str, fallbacks: list[str] = [], max_retries: int = 0, 
     return llm
 
 
-llm = get_robust_llm(model="gpt-4o-mini", fallbacks=["gpt-3.5-turbo"], max_retries=0, timeout=1.0)
+llm = get_robust_llm(model="gpt-4o-mini", fallbacks=["gpt-4-turbo", "gpt-3.5-turbo"], max_retries=0, timeout=1.0)
 
 if __name__ == "__main__":
     for i in range(5):
