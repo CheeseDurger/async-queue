@@ -25,8 +25,9 @@ async def process(queue: list[int], llm: ChatOpenAI) -> list[None | BaseExceptio
     results: list[None | BaseException] = await asyncio.gather(*tasks, return_exceptions=True)
     return results
 
-queue: list[int] = list(range(1, 10))
-llm: ChatOpenAI = get_robust_llm(model="gpt-4o-mini", fallbacks=["gpt-4-turbo", "gpt-3.5-turbo"])
-results: list[BaseException | None] = asyncio.run(process(queue, llm))
-exceptions: list[tuple[str, Exception]] = [(f'Item {item} failed', result) for item, result in zip(queue, results) if isinstance(result, Exception)]
-print(exceptions)
+if __name__ == "__main__":
+    queue: list[int] = list(range(1, 10))
+    llm: ChatOpenAI = get_robust_llm(model="gpt-4o-mini", fallbacks=["gpt-4-turbo", "gpt-3.5-turbo"])
+    results: list[BaseException | None] = asyncio.run(process(queue, llm))
+    exceptions: list[tuple[str, Exception]] = [(f'Item {item} failed', result) for item, result in zip(queue, results) if isinstance(result, Exception)]
+    print(exceptions)
